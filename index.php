@@ -4,7 +4,6 @@ date_default_timezone_set('America/Sao_Paulo');
 
 if(!isset($_SESSION['ice']['user'])){
 $_SESSION['ice']['pagina']='View/login.php';
-$_SESSION['ice']['titulo']='Braslar Refrigeração- Apontamento - Login';
 }
 
 
@@ -17,6 +16,7 @@ $_SESSION['ice']['titulo']='Braslar Refrigeração- Apontamento - Login';
          $script.=$_SESSION['ice']['mensagem'];
          $script.="')";
          $script.="</script>";
+         echo $script;
    
         }
         unset($_SESSION['ice']['erro']);
@@ -33,13 +33,10 @@ $_SESSION['ice']['titulo']='Braslar Refrigeração- Apontamento - Login';
     <title>
         <?php
         if (!isset($_SESSION['ice']['titulo'])) {
-            echo "Braslar Refrigeração - Apontamento";
+            echo "Braslar Refrigeração -PCP";
         } else {
             echo $_SESSION['ice']['titulo'];
         }
-        if (!isset($_SESSION['ice']['linha'])) {
-            $_SESSION['ice']['linha']="Linha 1";
-        } 
         ?>
     </title>
     <link rel="icon" type="image/x-icon" href="content/icone.png">
