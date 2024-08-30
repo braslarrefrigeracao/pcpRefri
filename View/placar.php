@@ -33,7 +33,7 @@ if(!isset($_SESSION['icepcp']['diapcp'])){
             <th>Código</th>
             <th>Modelo</th>
             <th>Descricão</th>
-            <th>Linha</th>
+            <th>Quantidade</th>
             <th>Valor</th>
         </thead>
         <tbody id="tbplacar">
@@ -45,24 +45,57 @@ if(!isset($_SESSION['icepcp']['diapcp'])){
 
 <script>
     async function totaldia(dia){
-        const url = "http://localhost/apiCold/valorTotalDia/"+dia
-       
+        const url = "http://localhost/apiCold/valorTotalDia/"+dia       
         const data = await fetch(url)
         const dado = await data.json()
-        console.log(dado)
         const d = document.getElementById('numPlacar')
         d.innerText = dado.total
     }
     totaldia('<?php echo $diapcp->format('Y-m-d')?>')
 
-    async function montatabela(dia){
-        const url = "http://localhost/apiCold/valorTotalDia/"+dia
-       
-        const data = await fetch(url)
-        const dado = await data.json()
-        console.log(dado)
-        const d = document.getElementById('numPlacar')
-        d.innerText = dado.total
+    async function montatabela(dia) {
+    const url = "http://localhost/apiCold/produzidosDia/" + dia;
+    console.log(url);
+    
+    try {
+        const response = await fetch(url);
+        const dado = await response.json();
+        const d = document.getElementById('tbplacar');
+        d.innerHTML = ''; // Usar innerHTML para remover todos os elementos
+
+        dado.forEach((item) => {
+            const tr = document.createElement('tr');
+            
+            const codigo = document.createElement('td');
+            const modelo = document.createElement('td');
+            const descricao = document.createElement('td');
+            const quantidade = document.createElement('td');
+            const valor = document.createElement('td');
+
+            // Preenchendo os dados das células
+            codigo.innerText = item.codigo;
+            modelo.innerText = item.modelo; // Adicionar os outros itens aqui
+            descricao.innerText = item.descricao;
+            quantidade.innerText = item.total;
+            let soma = item.total * item.valor
+            valor.innerText = soma;
+            // Adicionando as células à linha
+            tr.appendChild(codigo);
+            tr.appendChild(modelo);
+            tr.appendChild(descricao);
+            tr.appendChild(quantidade);
+            tr.appendChild(valor);
+
+            // Adicionando a linha ao corpo da tabela
+            d.appendChild(tr);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar os dados:', error);
     }
+}
+
+// Chamar a função com a data do PHP
+montatabela('<?php echo $diapcp->format('Y-m-d')?>');
+
     
 </script>
