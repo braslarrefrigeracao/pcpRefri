@@ -61,7 +61,7 @@ $_SESSION['icepcp']['pagina']='View/login.php';
     </div>
    
 
-    <script src="script.js"></script>
+ 
 </body>
 
 </html>

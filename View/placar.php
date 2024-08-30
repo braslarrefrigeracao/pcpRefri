@@ -10,7 +10,7 @@ if(!isset($_SESSION['icepcp']['diapcp'])){
         <div class="col">
             <div class="bg-dark text-bg-dark d-flex flex-column justify-content-center align-items-center m-1" style="min-height: 150px;">  
                 <h3>Total</h3>
-                <h1 id="numPlacar">999</h1>
+                <h1 id="numPlacar">0</h1>
             </div>
         </div>
         <div class="col p-1 m-1">
@@ -45,6 +45,24 @@ if(!isset($_SESSION['icepcp']['diapcp'])){
 
 <script>
     async function totaldia(dia){
-        const url = "http://localhost/apiCold/"
+        const url = "http://localhost/apiCold/valorTotalDia/"+dia
+       
+        const data = await fetch(url)
+        const dado = await data.json()
+        console.log(dado)
+        const d = document.getElementById('numPlacar')
+        d.innerText = dado.total
     }
+    totaldia('<?php echo $diapcp->format('Y-m-d')?>')
+
+    async function montatabela(dia){
+        const url = "http://localhost/apiCold/valorTotalDia/"+dia
+       
+        const data = await fetch(url)
+        const dado = await data.json()
+        console.log(dado)
+        const d = document.getElementById('numPlacar')
+        d.innerText = dado.total
+    }
+    
 </script>
