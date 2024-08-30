@@ -2,24 +2,24 @@
 session_start();
 date_default_timezone_set('America/Sao_Paulo');
 
-if(!isset($_SESSION['ice']['user'])){
-$_SESSION['ice']['pagina']='View/login.php';
+if(!isset($_SESSION['icepcp']['user'])){
+$_SESSION['icepcp']['pagina']='View/login.php';
 }
 
 
-    if (isset($_SESSION['ice']['erro'])){
+    if (isset($_SESSION['icepcp']['erro'])){
         
-        if ($_SESSION['ice']['erro']==true) {
+        if ($_SESSION['icepcp']['erro']==true) {
           
          $script="<script>";
          $script.="alert('";
-         $script.=$_SESSION['ice']['mensagem'];
+         $script.=$_SESSION['icepcp']['mensagem'];
          $script.="')";
          $script.="</script>";
          echo $script;
    
         }
-        unset($_SESSION['ice']['erro']);
+        unset($_SESSION['icepcp']['erro']);
         
      }
 ?>
@@ -32,10 +32,10 @@ $_SESSION['ice']['pagina']='View/login.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         <?php
-        if (!isset($_SESSION['ice']['titulo'])) {
+        if (!isset($_SESSION['icepcp']['titulo'])) {
             echo "Braslar Refrigeração -PCP";
         } else {
-            echo $_SESSION['ice']['titulo'];
+            echo $_SESSION['icepcp']['titulo'];
         }
         ?>
     </title>
@@ -56,7 +56,7 @@ $_SESSION['ice']['pagina']='View/login.php';
     </div>
     <div class="container">
         <?php 
-        include($_SESSION['ice']['pagina']);
+        include($_SESSION['icepcp']['pagina']);
         ?>
     </div>
    

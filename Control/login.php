@@ -1,23 +1,30 @@
 <?php 
 session_start();
-$dados = file_get_contents('http://localhost/apicold/getUser/'.$_POST['nick'].'/'.$_POST['senha']);
-$dados = json_decode($dados, true);
 try{
-    if (is_array($dados)) {
-        # code...
-    }
-if (count($dados)==2&&$dados['nivel']==0) {
-    $_SESSION['ice']['pagina']='View/placar.php';
-    $_SESSION['ice']['user']=$dados['user'];
-    $_SESSION['ice']['nivel']=$dados['nivel'];
-    $_SESSION['ice']['logado']=true;
-} else{
-    $_SESSION['ice']['erro']=true;
-    $_SESSION['ice']['mensagem']="Usuário não possui permissão";
+    $url = 'http://localhost/apicold/getUser/'.$_POST['nick'].'/'.$_POST['senha'];
+$dados = file_get_contents($url);
+$dados = json_decode($dados, true);
 
-}
+    if (is_array($dados)) {
+     if (count($dados)==2&&$dados['nivel']==0) {
+    $_SESSION['icepcp']['pagina']='View/placar.php';
+    $_SESSION['icepcp']['user']=$dados['user'];
+    $_SESSION['icepcp']['nivel']=$dados['nivel'];
+    $_SESSION['icepcp']['logado']=true;
+} else{
+    $_SESSION['icepcp']['erro']=true;
+    $_SESSION['icepcp']['mensagem']="Usuário não possui permissão";
+
+}   
+    }else{
+        $_SESSION['icepcp']['erro']=true;
+        $_SESSION['icepcp']['mensagem']="Teste a url {$url}";   
+    }
+
 }catch(Exception $e){
-    echo 'erro';
+    $_SESSION['icepcp']['erro']=true;
+    $_SESSION['icepcp']['mensagem']="Teste a url {$url}";
+
 
 }
 

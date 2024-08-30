@@ -13,7 +13,7 @@
     </div>
 </div>
 <?php 
-if(isset($_SESSION['ice']['logado'])){
+if(isset($_SESSION['icepcp']['logado'])){
     ?>
     <header>
     <ul class="nav justify-content-center">
