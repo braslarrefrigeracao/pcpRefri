@@ -1,25 +1,32 @@
+<?php
+if(!isset($_SESSION['icepcp']['diapcp'])){
+    $diapcp = new DateTime('now');
+}else{
+    $diapcp = new DateTime($_SESSION['icepcp']['diapcp']);
+}
+?>
 <div id="placar" class="container  text-center" style="width: 50%;">
     <div class="row">
-        <div class="col"
-<div class="bg-dark text-bg-dark d-flex flex-column justify-content-center align-items-center m-1" style="min-height: 150px;">
-    
-            <h3>Total</h3>
-            <h1 id="numPlacar">999</h1>
-        </div>
         <div class="col">
+            <div class="bg-dark text-bg-dark d-flex flex-column justify-content-center align-items-center m-1" style="min-height: 150px;">  
+                <h3>Total</h3>
+                <h1 id="numPlacar">999</h1>
+            </div>
+        </div>
+        <div class="col p-1 m-1">
+            <div class="m-1 p-1">
+                <h6>Dia Ativo: <?php echo $diapcp->format('d/m/Y')?> </h6>
+            </div>
             <form action="Control/datapcp.php" method="post">
-                <div class="input-group">
-                    <input type="date" name="diapcp" class="form form-control">
+                <div class="input-group m-1 p-1">
+                    <input type="date" name="diapcp" class="form form-control" value="<?php echo $diapcp->format('Y-m-d')?>" required>
                 </div>
-                <div class="input-group">
+                <div class="input-group m-1 p-1">
                     <input type="submit" value="Mude a data" class="btn btn-success">
                 </div>
-            </form>
+                </form>
+            </div>
         </div>
-
-    </div>
-      </div>
-</div>
 <div class="container" style="font-size:small">
     <table class="table table-sm table-light table-striped table-bordered">
         <thead class="text-center">
