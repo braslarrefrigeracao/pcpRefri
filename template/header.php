@@ -18,19 +18,19 @@ if(isset($_SESSION['icepcp']['logado'])){
     <header>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-          <a class="nav-link  link-light" href="#"><i class="bi bi-check2-circle"></i> Placar</a>
+          <a class="nav-link  link-light" href="Control/placar.php"><i class="bi bi-check2-circle"></i> Placar</a>
           </li>
       <li class="nav-item">
-        <a class="nav-link link-light" href="#"><i class="bi bi-clipboard-check"></i> Programação</a>
+        <a class="nav-link link-light" href="Control/programacao.php"><i class="bi bi-clipboard-check"></i> Programação</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-light" href="#"><i class="bi bi-device-ssd"></i> Produtos</a>
+        <a class="nav-link link-light" href="Control/produtos.php"><i class="bi bi-device-ssd"></i> Produtos</a>
       </li>
       <li class="nav-item link-light">
-        <a class="nav-link  link-light"><i class="bi bi-hammer"></i> Linhas</a>
+        <a class="nav-link  link-light" href="Control/linhas.php"><i class="bi bi-hammer"></i> Linhas</a>
       </li>
       <li class="nav-item link-light">
-        <a class="nav-link  link-light"><i class="bi bi-list-task"></i> Relatórios</a>
+        <a class="nav-link  link-light" href="Control/relatorios.php"><i class="bi bi-list-task"></i> Relatórios</a>
       </li>
     </ul>
       </header>     
