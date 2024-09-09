@@ -26,6 +26,13 @@
                     </span>
                     <input type="text" name="descricao" id="descricao" class="form form-control" required minlength="3">
                 </div>
+                <div class="input-group m-1 m-1">
+                    <span class="input-group-text">
+                        Prefixo
+                    </span>
+                    <input type="text" name="prefixo" id="prefixo" class="form form-control" required minlength="3">
+                    <input type="submit" value="Cadastra" class="btn btn-success">
+                </div>
             </fieldset>
         </form>
     </div>
@@ -53,15 +60,15 @@
         event.preventDefault();
 
         // Obter o valor do campo 'nova' e 'editando'
-        const novaLinha = document.getElementById('nova').value;
+        const novaLinha = document.getElementById('codigo').value;
         const editando = document.getElementById('editando').value === 'true';
-        const idLinha = document.getElementById('idlinha').value;
+        const idproduto = document.getElementById('idproduto').value;
 
         // Se estiver editando, chamar a função de atualização, senão chamar a de cadastro
         if (editando) {
-            atualiza_linha(idLinha, novaLinha);
+            atualiza_produto(idproduto);
         } else {
-            cadastra_linha(novaLinha);
+            cadastra_produto();
         }
     });
 
@@ -105,20 +112,23 @@
         categorias()
 
     }
-    async function cadastraproduto() {
+    async function cadastra_produto() {
         const codigo = document.getElementById('codigo').value
-        const modelo = document.getElementById('modelo').value
-        const descricao = document.getElementById('descricao').value
-        const idcategoria = document.getElementById('idcategoria').value
-        linha = linha.replaceAll(' ', '_');
-        url = "http://localhost/apicold/postProduto/" + linha
+        let  modelo = document.getElementById('modelo').value
+        let descricao = document.getElementById('descricao').value
+        const idcategoria = document.getElementById('categorias').value
+        const prefixo = document.getElementById('prefixo').value
+        descricao =descricao.replaceAll(' ','_',descricao)
+        modelo =modelo.replaceAll(' ','_',modelo)
+ 
+        const url = "http://localhost/apicold/postProduto/"+codigo+"/"+modelo+"/"+descricao+"/"+idcategoria+"/"+prefixo
+        console.log(url)
         const insere = await fetch(url)
             .then(() => {
                 document.getElementById('codigo').value = ''
-                document.getElementById('codigo').value = ''
-                document.getElementById('codigo').value = ''
-                document.getElementById('codigo').value = ''
-                document.getElementById('codigo').value = ''
+                document.getElementById('prefixo').value = ''
+                document.getElementById('modelo').value = ''
+                document.getElementById('descricao').value = ''
                 categorias()
                 document.getElementById('editando').value = false
 
@@ -147,17 +157,38 @@
             d.appendChild(op)
         })
     }
+    async function prefixo(id) {
+        const url = "http://localhost/apicold/prefixos/"+id
+        
+        const d = document.getElementById('prefixo')
+        d.innerText = ""
+        const response = await fetch(url)
+        const data = await response.json()
+        data.forEach((item) => {
+            console.log(item.prefixo)
+            d.value = item.prefixo
+        })
+    }
 
-    async function atualiza_produto(id, linha) {
-        linha = linha.replaceAll(' ', '_');
-        url = "http://localhost/apicold/updateLinha/" + id + "/" + linha
+    async function atualiza_produto() {
+        const codigo = document.getElementById('codigo').value
+        const id = document.getElementById('idproduto').value
+        let  modelo = document.getElementById('modelo').value
+        let descricao = document.getElementById('descricao').value
+        const idcategoria = document.getElementById('categorias').value
+        const prefixo = document.getElementById('prefixo').value
+        descricao =descricao.replaceAll(' ','_',descricao)
+        modelo =modelo.replaceAll(' ','_',modelo)
+        const url = "http://localhost/apicold/updateProduto/" + id + "/" + codigo+"/" +modelo+"/" +descricao+"/" +idcategoria+"/" +prefixo
         console.log(url)
         const insere = await fetch(url)
             .then(() => {
-                const nova = document.getElementById('nova')
-                const ed = document.getElementById('editando')
-                ed.value = false
-                nova.value = ''
+                document.getElementById('codigo').value = ''
+                document.getElementById('prefixo').value = ''
+                document.getElementById('modelo').value = ''
+                document.getElementById('descricao').value = ''
+                categorias()
+                document.getElementById('editando').value = false
             })
             .then(() => {
                 faz_tabela()
@@ -172,10 +203,13 @@
             return dados.id == id;
         });
         document.getElementById('codigo').value =filtra[0].codigo
+        document.getElementById('idproduto').value =filtra[0].id
         document.getElementById('modelo').value =filtra[0].modelo
         document.getElementById('descricao').value =filtra[0].descricao
-        document.getElementById('editanto').value =true
+        document.getElementById('editando').value =true
         categorias(filtra[0].idcategoria)
+       
+        prefixo(filtra[0].id)
 
     }
     faz_tabela()
