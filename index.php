@@ -42,6 +42,8 @@ $_SESSION['icepcp']['pagina']='View/login.php';
     <link rel="icon" type="image/x-icon" href="content/icone.png">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="datatables/dataTables.dataTables.min.css">
+    <script src="datatables/jquery-3.7.1.min.js"></script>
     
    
 </head>

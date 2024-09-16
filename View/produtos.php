@@ -38,7 +38,7 @@
     </div>
     <!-- tabela com as linhas existentes e botão pra editar -->
     <div class="container">
-        <table class="table table-dark table-striped table-bordered shadow" style="width: fit-content;">
+        <table class="table table-dark table-striped table-bordered shadow" style="width: fit-content;" id="produtos">
             <thead>
                 <tr>
                     <th>Codigo</th>
