@@ -33,7 +33,7 @@ if(isset($_SESSION['icepcp']['logado'])){
         <a class="nav-link  link-light" href="Control/apontamento.php"><i class="bi bi-bar-chart-steps"></i> Apontamento</a>
       </li>
       <li class="nav-item link-light">
-        <a class="nav-link  link-light" href="Control/relatorios.php"><i class="bi bi-list-task"></i> Relatórios</a>
+        <a class="nav-link  link-light" href="Control/relatorio.php"><i class="bi bi-list-task"></i> Relatórios</a>
       </li>
     </ul>
       </header>     
